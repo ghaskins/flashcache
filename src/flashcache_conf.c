@@ -1233,7 +1233,7 @@ flashcache_ctr(struct dm_target *ti, unsigned int argc, char **argv)
 
 	dmc->tgt = ti;
 
-	r = dm_get_device(ti, argv[0], 0, ti->len,
+	r = dm_get_device(ti, argv[0],
 			  dm_table_get_mode(ti->table), &dmc->disk_dev);
 	if (r) {
 		ti->error = "flashcache: Source device lookup failed";
@@ -1241,7 +1241,7 @@ flashcache_ctr(struct dm_target *ti, unsigned int argc, char **argv)
 	}
 	strncpy(dmc->disk_devname, argv[0], DEV_PATHLEN);
 
-	r = dm_get_device(ti, argv[1], 0, 0,
+	r = dm_get_device(ti, argv[1],
 			  dm_table_get_mode(ti->table), &dmc->cache_dev);
 	if (r) {
 		ti->error = "flashcache: Cache device lookup failed";
